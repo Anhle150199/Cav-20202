@@ -4,8 +4,8 @@
 CPP      = g++.exe -D__DEBUG__
 CC       = gcc.exe -D__DEBUG__
 WINDRES  = windres.exe
-OBJ      = fields.o jrb.o jrbgraph.o jval.o de2019.o
-LINKOBJ  = fields.o jrb.o jrbgraph.o jval.o de2019.o
+OBJ      = fields.o jrb.o jrbgraph.o jval.o de20202.o
+LINKOBJ  = fields.o jrb.o jrbgraph.o jval.o de20202.o
 //LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -g3
 LIBS     = -L"C:\MinGW\lib" -L"C:\MinGW\mingw32\lib" -static-libgcc -g3
 
@@ -38,5 +38,5 @@ jrbgraph.o: jrbgraph.cpp
 jval.o: jval.cpp
 	$(CPP) -c jval.cpp -o jval.o $(CXXFLAGS)
 
-de2019.o: de2019.cpp
-	$(CPP) -c de2019.cpp -o de2019.o $(CXXFLAGS)
+de20202.o: de20202.cpp
+	$(CPP) -c de20202.cpp -o de20202.o $(CXXFLAGS)

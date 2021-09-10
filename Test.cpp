@@ -11,35 +11,35 @@ void showlist(list <string> g)
         cout<<'\t'<<*it;
     cout<<'\n';
 }
-int main()
-{
-	int i,n;
-	char output[10][10];
-    Graph g = createGraph();
-    addEdge_str(g, "A", "D", 7);
-	addEdge_str(g, "A", "E", 7);
-	addEdge_str(g, "A", "C", 4);
-	addEdge_str(g, "A", "B", 3);
-	addEdge_str(g, "E", "D", 11);
-	addEdge_str(g, "C", "E", 9);
-	addEdge_str(g, "E", "F", 2);
-	addEdge_str(g, "C", "F", 8);
-	addEdge_str(g, "B", "C", 3);
-	addEdge_str(g, "B", "F", 12);
+// int main()
+// {
+// 	int i,n;
+// 	char output[10][10];
+//     Graph g = createGraph();
+//     addEdge_str(g, "A", "D", 7);
+// 	addEdge_str(g, "A", "E", 7);
+// 	addEdge_str(g, "A", "C", 4);
+// 	addEdge_str(g, "A", "B", 3);
+// 	addEdge_str(g, "E", "D", 11);
+// 	addEdge_str(g, "C", "E", 9);
+// 	addEdge_str(g, "E", "F", 2);
+// 	addEdge_str(g, "C", "F", 8);
+// 	addEdge_str(g, "B", "C", 3);
+// 	addEdge_str(g, "B", "F", 12);
 	
-	n = getAdjacentVertices_str (g, "A", output);
-    printf("Number of adjacent vertices : %d\n",n);
-    if (n==0) printf("No adjacent vertices of node \n");
-    else {   
-       printf("Adjacent vertices of node A:");
-       for (i=0; i<n; i++) printf("%5s", output[i]);
-    } 
-    printf("\n");
-    PRIM(g,"A");
-    PRIM(g,"E");
-    return 0;
-}
-/*
+// 	n = getAdjacentVertices_str (g, "A", output);
+//     printf("Number of adjacent vertices : %d\n",n);
+//     if (n==0) printf("No adjacent vertices of node \n");
+//     else {   
+//        printf("Adjacent vertices of node A:");
+//        for (i=0; i<n; i++) printf("%5s", output[i]);
+//     } 
+//     printf("\n");
+//     PRIM(g,"A");
+//     PRIM(g,"E");
+//     return 0;
+// }
+
 int main()
 {
 	int i,n;
@@ -84,7 +84,7 @@ int main()
     dijkstra(g,"HNL","PVD");
 	return 0;
 }
-*/
+
 /*
 int main()
 {

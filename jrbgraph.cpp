@@ -74,19 +74,19 @@ void addEdge_str(Graph graph, char *v1, char *v2, int weight)
 	}
 	// them canh v2 v1
 	// check xem da co dinh tren cay chua
-	bn = jrb_find_str(graph, v2);
-	if (bn == NULL) // neu chua co thi them vao
-	{
-		JRB tree = make_jrb();
-		jrb_insert_str(tree, strdup(v1), new_jval_i(weight));
-		jrb_insert_str(graph, strdup(v2), new_jval_v(tree));
-	}
-	else // dinh v2 da co tren cay
-	{
-		// them canh v1 v2
-		JRB tree = (JRB)jval_v(bn->val);
-		jrb_insert_str(tree, strdup(v1), new_jval_i(weight));
-	}
+	// bn = jrb_find_str(graph, v2);
+	// if (bn == NULL) // neu chua co thi them vao
+	// {
+	// 	JRB tree = make_jrb();
+	// 	jrb_insert_str(tree, strdup(v1), new_jval_i(weight));
+	// 	jrb_insert_str(graph, strdup(v2), new_jval_v(tree));
+	// }
+	// else // dinh v2 da co tren cay
+	// {
+	// 	// them canh v1 v2
+	// 	JRB tree = (JRB)jval_v(bn->val);
+	// 	jrb_insert_str(tree, strdup(v1), new_jval_i(weight));
+	// }
 }
 
 int getAdjacentVertices_str(Graph graph, char *v, char output[10][10])
@@ -102,17 +102,17 @@ int getAdjacentVertices_str(Graph graph, char *v, char output[10][10])
 	return total;
 }
 
-int getAdjacentVertices_int(Graph graph, int v, int *output)
-{
-	JRB node = jrb_find_int(graph, v);
-	JRB tree = (JRB)jval_v(node->val);
-	int total = 0;
-	jrb_traverse(node, tree)
-	{
-		output[total++] = jval_i(node->key);
-	}
-	return total;
-}
+// int getAdjacentVertices_int(Graph graph, int v, int *output)
+// {
+// 	JRB node = jrb_find_int(graph, v);
+// 	JRB tree = (JRB)jval_v(node->val);
+// 	int total = 0;
+// 	jrb_traverse(node, tree)
+// 	{
+// 		output[total++] = jval_i(node->key);
+// 	}
+// 	return total;
+// }
 
 list<string> getAllVertexes(Graph graph)
 {

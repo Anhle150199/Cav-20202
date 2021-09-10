@@ -157,11 +157,16 @@ int main()
             int idPage;
             cin >> idPage;
             cout << idPage << endl;
-
-            // readFile("./Data/webpages.txt", "./Data/pageConnections.txt", g, 2);
             n = getAdjacentVertices_int(g, idPage, output);
             printf("Number of adjacent vertices : %d\n", n);
-
+            if (n == 0)
+                printf("No adjacent vertices of node \n");
+            else
+            {
+                printf("Adjacent vertices of node A:");
+                for (i = 0; i < n; i++)
+                    printf("%5s", output[i]);
+            }
             break;
         case 3:
             printf("day la 3");
