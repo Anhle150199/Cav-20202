@@ -19,7 +19,7 @@ void showlist(list<string> g)
 }
 int main()
 {
-    int i, n, chose;
+    int i, n, chose, k = 0;
     bool check;
     char output[10][10];
     Graph g = createGraph();
@@ -27,7 +27,6 @@ int main()
     list<string>::iterator it1;
 
     char input[1000];
-    char *name1, *name2;
     string listFile;
     string text;
     int line = 0, lineNumber = 1, step = 0, max = 0, step1 = 0;
@@ -79,30 +78,21 @@ int main()
                     }
                     if (step > max)
                     {
-                        max = step;
+                        max = step - 1;
                         people[step1] = words[0];
                         step1 += 1;
                     }
-                    //         list.insert(pair<int, string>(atoi(words[1].c_str()), words[0]));
                     listFile += input;
                     listFile += "\n";
                 }
                 line += 1;
             }
         }
-        //in id va url cua web
-        // cout << "so luong Web Page: " << lineNumber << endl;
-        // map<int, string>::iterator it;
-        // for (it = list.begin(); it != list.end(); it++)
-        // {
-        //     cout << it->first << ": " << it->second << endl;
-        // }
     }
     else
     {
         cout << "file is not found" << endl;
     }
-
     while (1)
     {
         printf("=============Menu=============\n1. Danh sach nguoi co tiep xuc gan\n2. Danh sach tiep xuc gan\n3. Kiem tra tiep xuc gan 2 nguoi\n4. Danh sach tiep xuc gan cua 1 nguoi\n5. Nguoi tiep xuc nhieu nhat\n6. Nhap F0\n7. Them nguoi tiep xuc gan\n8. Bo sung tiep xuc gan\n9. Ghi file danh sach\n10. Thoat\n==========================\n");
@@ -120,74 +110,136 @@ int main()
             cout << listFile << endl;
             break;
         case 3:
+        {
+            cin.ignore();
+            string n1, n2;
+            int x = 1;
 
             cout << "nhap ten nguoi thu nhat: " << endl;
-            cin >> name1;
+            cin >> n1;
+            const char *tmp1 = n1.c_str();
             cout << "nhap ten nguoi thu hai: " << endl;
-            cin >> name2;
-            n = getEdgeWeight_str(g, name1, name2);
-            if (n != -1)
-            {
-                cout << name1 << " va " << name2 << " tiep xuc gan" << endl;
-            }
-            else
-            {
-                cout << name1 << " va " << name2 << " khong tiep xuc gan" << endl;
-            }
-            break;
-        case 4:
-            memset(output, 0, sizeof(output));
-            cout << "nhap ten nguoi can check: " << endl;
-            cin >> name1;
+            cin >> n2;
+            const char *tmp2 = n2.c_str();
+            char *name1 = strdup(tmp1);
+            char *name2 = strdup(tmp2);
             n = getAdjacentVertices_str(g, name1, output);
             if (n == 0)
-                cout << name1 << "khong co trong danh sach" << endl;
+                printf("No adjacent vertices of node \n");
             else
             {
-                cout << "danh sach tiep xuc gan voi " << name1 << endl;
-                for (i = 0; i < n; i++)
+                printf("Tinh trang: ");
+                // cout << n<<endl;
+                for (i = 0; i <= n; i++)
                 {
-                    printf("%5s", output[i]);
+                    // cout<< output[i] <<endl;
+                    if (output[i][0] == name2[0])
+                    {
+                        cout << "Co tiep xuc gan" << endl;
+                        x = 0;
+                        break;
+                    }
                 }
             }
-            cout << endl;
-            break;
 
-        case 5:
-            cout << "nhung nguoi tiep xuc nhieu nhat: " << endl;
-            for (i = 0; i < lineNumber; i++)
-            {
-                people[i].copy(node3, people[i].size() + 1);
-                node3[people[i].size()] = '\0';
+            if (x == 1)
+                printf(" Khong  tiep xuc\n");
+        }
+        break;
+        case 4:
+        {
+            cin.ignore();
+            string n1;
+            int x;
 
-                n = getAdjacentVertices_str(g, node3, output);
-                if (n == max)
-                    cout << node3;
-            }
-            cout << endl;
-            break;
-        case 6:
-            cout << "nhap F0" << endl;
-            cin >> name1;
+            cout << "nhap ten : " << endl;
+            cin >> n1;
+            const char *tmp1 = n1.c_str();
+            char *name1 = strdup(tmp1);
             n = getAdjacentVertices_str(g, name1, output);
             if (n == 0)
-                printf("khong co nguoi tiep xuc \n");
+                printf("Khong co nguoi tiep xuc gan \n");
             else
             {
-                cout << "Danh sach F1: " << endl;
+                printf(" Danh sach tiep xuc gan: ");
                 for (i = 0; i < n; i++)
                     printf("%5s", output[i]);
             }
-            printf("\n");
-            break;
+            cout << endl;
+        }
+        break;
+
+        case 5:
+        {
+            int aa;
+            cout << "nhung nguoi tiep xuc nhieu nhat: " << endl;
+            for (i = 0; i < step1; i++)
+            {
+                const char *tmp = people[i].c_str();
+                char *name = strdup(tmp);
+                aa = getAdjacentVertices_str(g, name, output);
+
+                if (aa == max)
+                    cout << name << endl;
+            }
+        }
+        break;
+        case 6:
+        {
+            cin.ignore();
+            string n1;
+            int x;
+            char out[10][10];
+
+            cout << "nhap ten : " << endl;
+            cin >> n1;
+            const char *tmp1 = n1.c_str();
+            char *name1 = strdup(tmp1);
+            n = getAdjacentVertices_str(g, name1, output);
+            if (n == 0)
+                printf("Khong co F1 \n");
+            else
+            {
+                printf(" Danh sach F1: ");
+                for (i = 0; i < n; i++)
+                    printf("%5s", output[i]);
+                cout << endl;
+                printf(" Danh sach F2: ");
+                for (i = 0; i < n; i++)
+                {
+                    x = getAdjacentVertices_str(g, output[i], out);
+                    if (x == 0)
+                        continue;
+                    else
+                    {
+                        for (i = 0; i < x; i++)
+                            printf("%5s", out[i]);
+                    }
+                }
+                cout << endl;
+            }
+        }
+        break;
         case 7:
         case 8:
-            cout << "nhap ten nguoi tiep xuc 1 :" << endl;
-            cin >> name1;
-            cout << "nhap ten nguoi tiep xuc 2 :" << endl;
-            cin >> name2;
+        {
+            cin.ignore();
+            string n1, n2;
+            int x;
+
+            cout << "nhap ten nguoi thu nhat: " << endl;
+            cin >> n1;
+            const char *tmp1 = n1.c_str();
+            cout << "nhap ten nguoi thu hai: " << endl;
+            cin >> n2;
+            const char *tmp2 = n2.c_str();
+            char *name1 = strdup(tmp1);
+            char *name2 = strdup(tmp2);
+
             addEdge_str(g, name1, name2, 1);
             cout << " da them " << name1 << "va " << name2 << endl;
+        }
+        break;
 
         case 9:
         case 10:
