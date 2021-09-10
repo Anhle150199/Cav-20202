@@ -100,15 +100,21 @@ int main()
         switch (chose)
         {
         case 1:
+        {
             printf("Danh sach nguoi tiep xuc gan: \n");
             vertexes = getAllVertexes(g);
             showlist(vertexes);
             printf("\n");
-            break;
+        }
+
+        break;
         case 2:
+        {
             cout << lineNumber << endl;
             cout << listFile << endl;
-            break;
+        }
+
+        break;
         case 3:
         {
             cin.ignore();
@@ -221,6 +227,30 @@ int main()
         }
         break;
         case 7:
+        {
+            int x;
+            string name;
+            cout << "Nhap so nguoi tiep xuc: " << endl;
+            cin >> x;
+            cout << "Nhap ten nguoi moi" << endl;
+            cin >> name;
+            const char *tmp1 = name.c_str();
+            char *name1;
+            char *name2;
+            name1 = strdup(tmp1);
+            cout << "nhap ten nguoi tiep xuc" << endl;
+            for (i = 1; i <= x; i++)
+            {
+                cin >> name;
+                const char *tmp1 = name.c_str();
+                name2 = strdup(tmp1);
+                // cout << name2 << endl;
+                addEdge_str(g, name1, name2, 1);
+                addEdge_str(g, name2, name1, 1);
+            }
+            cout << "Nhap thanh cong" << endl;
+        }
+        break;
         case 8:
         {
             cin.ignore();
