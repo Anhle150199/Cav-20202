@@ -30,12 +30,12 @@ int main()
     char *name1, *name2;
     string listFile;
     string text;
-    int line = 0, lineNumber = 1, step = 0, max =0;
+    int line = 0, lineNumber = 1, step = 0, max = 0, step1 = 0;
     map<int, string> list;
 
     string word;
-    string words[100];
-    char node1[1000], node2[1000];
+    string words[100], people[1000];
+    char node1[1000], node2[1000], node3[1000];
 
     std::ifstream f("./Data/tiepXucGan.txt", ios::in);
 
@@ -51,7 +51,7 @@ int main()
                 if (line == 0)
                 {
                     text += input;
-                    cout << input << endl;
+                    // cout << input << endl;
 
                     lineNumber = atoi(text.c_str());
                 }
@@ -76,6 +76,12 @@ int main()
                             addEdge_str(g, node1, node2, step);
                         }
                         step += 1;
+                    }
+                    if (step > max)
+                    {
+                        max = step;
+                        people[step1] = words[0];
+                        step1 += 1;
                     }
                     //         list.insert(pair<int, string>(atoi(words[1].c_str()), words[0]));
                     listFile += input;
@@ -114,32 +120,23 @@ int main()
             cout << listFile << endl;
             break;
         case 3:
-            check = false;
+
             cout << "nhap ten nguoi thu nhat: " << endl;
             cin >> name1;
             cout << "nhap ten nguoi thu hai: " << endl;
             cin >> name2;
-            n = getAdjacentVertices_str(g, name1, output);
-            if (n == 0)
-                cout << name1 << " va " << name2 << "khong tiep xuc gan" << endl;
+            n = getEdgeWeight_str(g, name1, name2);
+            if (n != -1)
+            {
+                cout << name1 << " va " << name2 << " tiep xuc gan" << endl;
+            }
             else
             {
-                for (i = 0; i < n; i++)
-                {
-                    if (strcmp(name2, output[i]) == 0)
-                    {
-                        cout << name1 << " va " << name2 << " tiep xuc gan" << endl;
-                        check = true;
-                        break;
-                    }
-                }
-                if (check == false)
-                {
-                    cout << name1 << " va " << name2 << " khong tiep xuc gan" << endl;
-                }
+                cout << name1 << " va " << name2 << " khong tiep xuc gan" << endl;
             }
             break;
         case 4:
+            memset(output, 0, sizeof(output));
             cout << "nhap ten nguoi can check: " << endl;
             cin >> name1;
             n = getAdjacentVertices_str(g, name1, output);
@@ -147,7 +144,7 @@ int main()
                 cout << name1 << "khong co trong danh sach" << endl;
             else
             {
-                cout<< "danh sach tiep xuc gan voi "<< name1<< endl;
+                cout << "danh sach tiep xuc gan voi " << name1 << endl;
                 for (i = 0; i < n; i++)
                 {
                     printf("%5s", output[i]);
@@ -157,10 +154,41 @@ int main()
             break;
 
         case 5:
+            cout << "nhung nguoi tiep xuc nhieu nhat: " << endl;
+            for (i = 0; i < lineNumber; i++)
+            {
+                people[i].copy(node3, people[i].size() + 1);
+                node3[people[i].size()] = '\0';
 
+                n = getAdjacentVertices_str(g, node3, output);
+                if (n == max)
+                    cout << node3;
+            }
+            cout << endl;
+            break;
         case 6:
+            cout << "nhap F0" << endl;
+            cin >> name1;
+            n = getAdjacentVertices_str(g, name1, output);
+            if (n == 0)
+                printf("khong co nguoi tiep xuc \n");
+            else
+            {
+                cout << "Danh sach F1: " << endl;
+                for (i = 0; i < n; i++)
+                    printf("%5s", output[i]);
+            }
+            printf("\n");
+            break;
         case 7:
         case 8:
+            cout << "nhap ten nguoi tiep xuc 1 :" << endl;
+            cin >> name1;
+            cout << "nhap ten nguoi tiep xuc 2 :" << endl;
+            cin >> name2;
+            addEdge_str(g, name1, name2, 1);
+            cout << " da them " << name1 << "va " << name2 << endl;
+
         case 9:
         case 10:
             cout << "Shut down ..." << endl;
